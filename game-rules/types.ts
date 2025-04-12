@@ -5,7 +5,7 @@ export type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 10 | 11 | 12; // 10‑Jack, 11‑
 export interface Card {
   suit: Suit;
   rank: Rank;
-  value: number;
+  strength: number;
 }
 
 export type PlayerId = string;
@@ -13,6 +13,7 @@ export type PlayerId = string;
 export interface Player {
   id: PlayerId;
   hand: Card[];
+  isHuman: boolean;
 }
 
 export type TrucoAction =
@@ -26,10 +27,12 @@ export type TrucoAction =
   | "REAL_ENVIDO"
   | "FLOOR_SCORE"; // Optional depending on rule set
 
+type Play = { playerId: PlayerId; card: Card };
+
 export interface Round {
   number: number;
   turnOrder: PlayerId[];
-  cardsPlayed: { playerId: PlayerId; card: Card }[];
+  tricks: Play[][]; // Array of 3 tricks, each trick is a list of 2 plays
   roundWinner?: PlayerId;
 }
 
@@ -47,4 +50,14 @@ export interface Game {
  */
 export interface TrucoState {
   viraSuit?: Suit;
+  phase: GamePhase;
+  envidoPoints?: Record<PlayerId, number>;
+  trucoLevel: number; // 3 = Truco, 6 = Retruco, 9 = Vale nueve, vale juego
 }
+
+export type GamePhase =
+  | "DEALING"
+  | "PLAYING"
+  | "TRUCO_CALLED"
+  | "ENVIDO_CALLED"
+  | "SCORING";
