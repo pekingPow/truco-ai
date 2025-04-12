@@ -20,6 +20,17 @@
 
 // If state.ts and truco_reducer.ts include "whose turn" logic, you might already have this.
 
+// Next Steps
+// Integrate with CLI Game:
+
+// Use this simplified evaluateTrick function in the CLI game loop in cli_game.ts.
+// Track Scores:
+
+// Add logic to track the number of tricks won by each player and determine the overall winner.
+// Test the MVP:
+
+// Play a few rounds in the terminal to ensure the game logic works as expected.
+
 import { createInitialState } from "../state/state";
 import { reducer } from "../state/truco_reducer";
 import { nextRound } from "./round_logic";
