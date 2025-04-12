@@ -1,4 +1,4 @@
-// deck.ts  (optional – separate file)
+// deck.ts contains deck initialization and shuffle logic.
 import { Card, Rank, Suit } from "./types";
 
 export const SUITS: Suit[] = ["espadas", "bastos", "oros", "copas"];

@@ -1,4 +1,4 @@
-// rules.ts
+// rules.ts Core game logic (who wins round, etc.)
 import { Card, Rank, Suit, TrucoState } from "./types";
 
 /**

@@ -1,4 +1,4 @@
-//state.ts
+//state.ts Manages current game state (whose turn, cards on table, etc.)
 export interface TrucoState {
   hand: Card[]; // my current hand
   trick: Card[]; // cards already on the table this trick
