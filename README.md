@@ -1,32 +1,59 @@
-# truco-ai
+# Truco AI Engine
 
-This repo is a smaller component of the bigger Truco project. Truco is a card game. This repo will become the AI which plays Truco against humans.
+This repository is part of a larger project to create a web-based version of the Venezuelan card game **Truco**. The goal of this repo is to build the **AI engine** and core game logic that powers the game. Eventually, this engine will support both human vs. human and human vs. AI gameplay.
 
-Proposed v0.1 layout:
+## Features
+
+- **Core Game Logic**: Implements the rules of Venezuelan Truco, including card ranking and trick evaluation.
+- **Scoring System**: Tracks the number of tricks won by each player (in progress).
+- **State Management**: Manages game state transitions (planned).
+- **AI Player**: A bot that plays Truco using heuristics (future development).
+
+## Project Stages
+
+1. **Stage 1: 1-on-1 Human Game (Current)**
+
+   - Testing the game logic in a simple terminal-based game between two human players.
+   - Focused on card ranking, trick evaluation, and scoring.
+
+2. **Stage 2: Human vs. AI Game**
+
+   - Introduce a basic AI player that uses heuristics to play against a human.
+
+3. **Stage 3: Full Web-Based Game**
+   - Integrate the engine with a frontend built using Phaser or similar frameworks.
+   - Add features like animations, sound effects, and a graphical interface.
+
+## Directory Structure
 
 truco/
-├── game_rules/ # universal, UI‑free logic
-│ ├── rules.ts
-│ └── **tests**/rules.test.ts
+├── game_rules/ # Core game logic
+│ ├── rules.ts # Trick evaluation and card ranking
+│ └── tests/ # Unit tests for game rules
 │
-├── state/
-│ ├── types.ts # TrucoState, Action
-│ └── reducer.ts
+├── state/ # Game state management (planned)
+│ ├── types.ts # TrucoState, Action types
+│ └── reducer.ts # Reducer for state transitions
 │
-├── ai/ # one file per bot version
-│ └── heuristic_bot.py # or .ts if you stay JS‑only
+├── ai/ # AI player logic (future)
+│ └── heuristic_bot.ts
 │
-├── frontend/
+├── frontend/ # Web-based UI (future)
 │ ├── scenes/ # Phaser scenes (Menu, Table, Results)
-│ ├── ui/ # buttons, pop‑ups, React components if any
+│ ├── ui/ # UI components
 │ └── main.ts
 │
-├── assets/
-│ ├── cards/_.png
-│ └── sfx/_.mp3
+├── assets/ # Game assets (cards, sounds)
+│ ├── cards/ # Card images
+│ └── sfx/ # Sound effects
 │
-├── backend/ (optional)
-│ └── ... # Django or FastAPI
-│
-├── tests/ # high‑level integration tests
-└── package.json / pyproject.toml
+├── tests/ # High-level integration tests
+└── package.json # Project configuration
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request if you'd like to help improve the project.
+
+## License
+
+This project is licensed under the MIT License.
