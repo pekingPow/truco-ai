@@ -33,14 +33,24 @@ import { Card, Rank, Suit, TrucoState, PlayerId } from "./types";
 //   }
 //   return bestIdx;
 // }
+
+// If you need to distinguish versions later:
+
+// baseHierarchy — for MVP1’s _BASE_ORDER
+
+// dynamicHierarchy — for vira-enhanced rankings
+
+// powerTable — more explicit about its purpose (also a good name)
+
 export function evaluateTrick(
-  played: readonly { playerId: PlayerId; card: Card }[]
+  played: readonly { playerId: PlayerId; card: Card }[],
+  hierarchy: PowerTable
 ): PlayerId {
   if (played.length !== 2) throw new Error("A trick must have exactly 2 cards");
 
   const [play1, play2] = played;
-  const power1 = _power(play1.card);
-  const power2 = _power(play2.card);
+  const power1 = _power(play1.card, hierarchy);
+  const power2 = _power(play2.card, hierarchy);
 
   return power1 > power2 ? play1.playerId : play2.playerId;
 }
@@ -48,7 +58,7 @@ export function evaluateTrick(
 /* ──────────────────────────  PRIVATE HELPERS  ────────────────────────── */
 
 /** Static hierarchy for the 40‑card Spanish deck (no vira). */
-const _BASE_ORDER: readonly (readonly [Rank, Suit | "any"])[] = [
+const _Static_Hierarchy: readonly (readonly [Rank, Suit | "any"])[] = [
   [1, "espadas"],
   [1, "bastos"],
   [7, "espadas"],
@@ -68,12 +78,14 @@ const _BASE_ORDER: readonly (readonly [Rank, Suit | "any"])[] = [
 ];
 
 /** Calculates the power of a card based on the static hierarchy. */
-function _power(card: Card): number {
-  const idx = _BASE_ORDER.findIndex(
+type PowerTable = (readonly [Rank, Suit | "any"])[];
+
+function _power(card: Card, hierarchy: PowerTable): number {
+  const idx = hierarchy.findIndex(
     ([rank, suit]) =>
       rank === card.rank && (suit === card.suit || suit === "any")
   );
-  return idx >= 0 ? 90 - idx : 0; // Higher index = lower power
+  return idx >= 0 ? 90 - idx : 0; // Higher index = lower pow
 }
 
 /** Extra “piezas” promoted when there is a vira (Venezuelan variant). 
