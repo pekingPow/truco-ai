@@ -26,6 +26,7 @@ This repository is part of a larger project to create a web-based version of the
 
 ## Directory Structure
 
+```
 truco/
 ├── game_rules/ # Core game logic
 │ ├── rules.ts # Trick evaluation and card ranking
@@ -49,6 +50,7 @@ truco/
 │
 ├── tests/ # High-level integration tests
 └── package.json # Project configuration
+```
 
 ## Contributing
 
